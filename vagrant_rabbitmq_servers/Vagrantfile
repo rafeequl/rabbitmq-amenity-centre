@@ -77,12 +77,15 @@ Vagrant.configure(2) do |config|
     vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional'] 
   end
 
-  config.vm.define "rmq1" do |rmq1|
-    rmq1.vm.name = "rmq1"
-    rmq1.vm.hostname = "rmq1"
-    rmq1.vm.box = "nrel/CentOS-6.5-x86_64"
-    rmq1.vm.network "private_network", ip: "192.168.33.101"
-    rmq1.vm.provision :shell, path: "install_dev_packages.sh"
-  end
+  NUM_NODES = 2 # Up to 9 !
 
+  1.upto(NUM_NODES) do |node_num|
+    node_name = "rmq#{node_num}"
+    config.vm.define node_name do |node|
+      node.vm.hostname = "#{node_name}"
+      node.vm.box = "nrel/CentOS-6.5-x86_64"
+      node.vm.network "private_network", ip: "192.168.33.10#{node_num}"
+      node.vm.provision :shell, path: "install_dev_packages.sh"
+    end
+  end
 end

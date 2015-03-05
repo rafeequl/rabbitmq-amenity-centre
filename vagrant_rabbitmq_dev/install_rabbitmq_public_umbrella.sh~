@@ -23,17 +23,4 @@ echo '[{rabbit, [{loopback_users, []}]}].' > /etc/rabbitmq/rabbitmq.config
 service rabbitmq-server start
 rabbitmq-plugins enable rabbitmq_management
 
-# Ruby
-gem install bunny
-
-# Java
-yum -y install java-1.8.0-openjdk-devel
-
-# Add Ding-Yi Chen's Maven repo
-wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
-sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
-
-# Maven
-yum -y install apache-maven
-
 
