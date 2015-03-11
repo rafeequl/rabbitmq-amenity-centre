@@ -10,6 +10,8 @@ chkconfig iptables off
 # Add the EPEL repo as a source (for Erlang)
 wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 rpm -Uvh epel-release-6*.rpm
+sed -i "s/mirrorlist=https/mirrorlist=http/" /etc/yum.repos.d/epel.repo
+
 
 # Erlang
 yum -y install erlang
